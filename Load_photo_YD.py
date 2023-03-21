@@ -36,6 +36,7 @@ class LoaderYD:
         response = requests.post(url_load, params=params, headers=headers )
         response.raise_for_status()
         if response.status_code == 202:
-            my_logger.info(f"A new photo load in folder {name_field} on Yandex. Disk ")]
+            my_logger.info(f"A new photo load in folder {name_field} on Yandex. Disk")
+
         
 
