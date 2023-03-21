@@ -36,7 +36,7 @@ if __name__ == '__main__':
             bar.next()
             time.sleep(1)
         bar.finish()
-        with open('result.json', 'w') as f:
+        with open('result.json', 'w') as f: # полученного списка фотографий в файл result.json
             json.dump(result, f, ensure_ascii = False, indent=2)
         my_logger.info(f"Successful result: load {len(result)} photo.")
     except KeyError as err:

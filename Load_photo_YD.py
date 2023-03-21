@@ -9,24 +9,24 @@ my_formatter = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s
 my_handler.setFormatter(my_formatter)
 my_logger.addHandler(my_handler)
 
-class LoaderYD:
+class LoaderYD:  #Класс для загрузки фото на яндекс диск
     def __init__(self, token_YD):
         self.token_YD = token_YD
     
-    def get_headers(self):
+    def get_headers(self): # метод получения headers для запросов к api яндекс
         return {
             'Content-Type': 'application/json',
             'Authorization': 'OAuth {}'.format(self.token_YD)
         }
     
-    def _put_upload_field(self, name_field):
+    def _put_upload_field(self, name_field):  #метод создания папки для закладки фото на Яндекс Диске
         upload_url = "https://cloud-api.yandex.net/v1/disk/resources"
         headers = self.get_headers()
         params = {"path": name_field, "fields":name_field}
         response = requests.put(upload_url, headers=headers, params=params)
         return name_field
 
-    def upload_file_to_disk(self, name_field, name_file, photo_url):
+    def upload_file_to_disk(self, name_field, name_file, photo_url):  #Метод загрузки файлов на диск в созданную папку
         url_load = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
         headers = self.get_headers()
         params  = {'url':photo_url,

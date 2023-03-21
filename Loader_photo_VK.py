@@ -11,14 +11,14 @@ my_formatter = logging.Formatter("%(name)s %(asctime)s %(levelname)s %(message)s
 my_handler.setFormatter(my_formatter)
 my_logger.addHandler(my_handler)
 
-class LoaderPhotoVK:
+class LoaderPhotoVK: #класс загрузчика списка фотографий из api VK
     url = 'https://api.vk.com/method/'
     def __init__(self, token, id_users, version):
         self.token = token
         self.id_users = id_users
         self.version = version
     
-    def loader_photo_vk(self): 
+    def loader_photo_vk(self): #  метод получения списка фотографий из профиля
         photo_loader_url = self.url + 'photos.get'
         params = {
             'access_token':self.token,
@@ -35,7 +35,7 @@ class LoaderPhotoVK:
         my_logger.info(f"Received a list of VK photos for module {__name__}")
         return req
 
-    def photo_filter(self):
+    def photo_filter(self): #метод выборки необходимых фотографий из общего списка и получение списка ссылок для загрузки
         self.photos_list = []
         for data in self.loader_photo_vk()["response"]["items"]:
              self.photo_dict = {}
